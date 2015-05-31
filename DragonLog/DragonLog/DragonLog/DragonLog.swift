@@ -125,6 +125,19 @@ public class _DRLogger {
 		self.disabledTags.removeAll(keepCapacity: false)
 	}
 	
+	// MARK: - Public Methods - Tag Schemes
+	
+	/**
+		Load a tag scheme into the logger. This will override any previous calls to configure the tag status, and the logger will take the state as
+		defined by the loaded log scheme. This will also override any previous calls to this method.
+	
+		:param: scheme The log scheme to be loaded.
+	*/
+	public func loadLogScheme(scheme: DRLogScheme) {
+		self.disabledTags = scheme.disabledTags
+		self.soloTags = scheme.soloTags
+	}
+	
 	// MARK: - Private Methods
 	
 	private func _isTagEnabled(tag: String) -> Bool {
@@ -135,6 +148,60 @@ public class _DRLogger {
 			// Else, check that the tag has not been disabled
 			return !contains(disabledTags, tag)
 		}
+	}
+	
+}
+
+/**
+	Use this class to configure a scheme that can then be loaded into the logger object to configure which tags it should print and which to ignore.
+	You can use log schemes to tie in with your build schemes to enable/disable log tags for debug/release builds, or just to make life easier when debugging.
+*/
+public class DRLogScheme {
+	
+	// MARK: - Instance Variables
+	
+	private var disabledTags = Set<String>()
+	private var soloTags: [String]? = nil
+	
+	// MARK: - Class Methods
+	
+	/**
+		Create a tag scheme with a list of tags to be disabled. This scheme can then be loaded into the logger object to configure it.
+	
+		:param: disabledTags The tags that will be disabled in the logger if this scheme is loaded.
+	*/
+	class func disabledTagsScheme(disabledTags: [String]) -> DRLogScheme {
+		return DRLogScheme(disabledTags: disabledTags)
+	}
+	
+	/**
+		Create a tag scheme with a list of tags to be exclusively enabled. This scheme can then be loaded into the logger object to configure it.
+
+		:param: disabledTags The tags that will be exclusively enabled in the logger if this scheme is loaded.
+	*/
+	class func soloTagsScheme(soloTags: [String]) -> DRLogScheme {
+		return DRLogScheme(soloTags: soloTags)
+	}
+	
+	/**
+		Create a tag scheme with all tags muted. This scheme can then be loaded into the logger object to configure it.
+	*/
+	class func muteScheme() -> DRLogScheme {
+		return DRLogScheme(soloTags: [])
+	}
+	
+	// MARK: - Object Lifecycle Methods
+	
+	private init(disabledTags: [String]) {
+		// Add all of the passed in tags to the disabled tags set
+		for tag in disabledTags {
+			self.disabledTags.insert(tag)
+		}
+	}
+	
+	private init(soloTags: [String]) {
+		// Keep hold of the array of solo tags
+		self.soloTags = soloTags
 	}
 	
 }
