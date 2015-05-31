@@ -15,6 +15,7 @@ public class _DRLogger {
 	// MARK: - Private Instance Variables
 	
 	private let stdOutFileHandle = NSFileHandle.fileHandleWithStandardOutput()
+	private let stdErrFileHandle = NSFileHandle.fileHandleWithStandardError()
 	
 	// MARK: - Public Instance Variables
 	
@@ -30,9 +31,9 @@ public class _DRLogger {
 	// MARK: - Public Methods - Logging to standard out
 	
 	/**
-	Print an object to standard out. This function prints the printable object with the tag "DRLog", you may need to know this if you want to 'disable' or 'solo' these logs.
-	
-	:param: printableObject The object to be printed to standard out.
+		Print an object to standard out. This function prints the printable object with the tag "DRLog", you may need to know this if you want to 'disable' or 'solo' these logs.
+		
+		:param: printableObject The object to be printed to standard out.
 	*/
 	public func logIt(printableObject: Printable) {
 		logIt(printableObject, tag: "DRLog")
@@ -50,6 +51,25 @@ public class _DRLogger {
 	
 	// MARK: - Public Methods - Logging to standard error
 	
+	/**
+		Print an object to standard error. This function prints the printable object with the tag "DRLogErr", you may need to know this if you want to 'disable' or 'solo' these logs.
+		
+		:param: printableObject The object to be printed to standard error.
+	*/
+	public func logErr(printableObject: Printable) {
+		logErr(printableObject, tag: "DRLogErr")
+	}
+	
+	/**
+		Print an object to standard error, with a tag for identifying a group of logs.
+		
+		:param: printableObject The object to be printed to standard error.
+		:param: tag The tag to identify a group of logs.
+	*/
+	public func logErr(printableObject: Printable, tag: String) {
+		log(printableObject, tag: tag, fileHandle: stdErrFileHandle)
+	}
+	
 	// MARK: - Public Methods - Generic logging
 	
 	/**
@@ -65,7 +85,7 @@ public class _DRLogger {
 				fileHandle.writeData(data)
 			} else {
 				let data = "Unable to convert string!".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
-				fileHandle.writeData(data)
+				stdErrFileHandle.writeData(data)
 			}
 		}
 	}
