@@ -15,8 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		DRLogger.logIt("This is a test log!")
-		DRLogger.logIt("This is test log 2!")
 		// Override point for customization after application launch.
 		return true
 	}
