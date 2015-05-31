@@ -16,11 +16,19 @@ public class _DRLogger {
 	
 	private let stdOutFileHandle = NSFileHandle.fileHandleWithStandardOutput()
 	private let stdErrFileHandle = NSFileHandle.fileHandleWithStandardError()
+	private var disabledTags = Set<String>()
+	private var soloTags: [String]? = nil
 	
 	// MARK: - Public Instance Variables
 	
-	private var disabledTags = Set<String>()
-	private var soloTags: [String]? = nil
+	/**
+		The tag to be used when using the most simple logging method. Change this to change the tag used when logging, or use this to enable/disable the default logs.
+	*/
+	public var defaultLogTag = "DRLog"
+	/**
+		The tag to be used when using the most simple error logging method. Change this to change the tag used when error logging, or use this to enable/disable the default logs.
+	*/
+	public var defaultErrLogTag = "DRLogErr"
 	
 	// MARK: - Object Lifecycle Methods
 	
@@ -31,12 +39,12 @@ public class _DRLogger {
 	// MARK: - Public Methods - Logging to standard out
 	
 	/**
-		Print an object to standard out. This function prints the printable object with the tag "DRLog", you may need to know this if you want to 'disable' or 'solo' these logs.
+		Print an object to standard out. This function prints the printable object with the tag specified in `defaultLogTag`, you may need to know this if you want to 'disable' or 'solo' these logs.
 		
 		:param: printableObject The object to be printed to standard out.
 	*/
 	public func logIt(printableObject: Printable) {
-		logIt(printableObject, tag: "DRLog")
+		logIt(printableObject, tag: defaultLogTag)
 	}
 	
 	/**
@@ -52,12 +60,12 @@ public class _DRLogger {
 	// MARK: - Public Methods - Logging to standard error
 	
 	/**
-		Print an object to standard error. This function prints the printable object with the tag "DRLogErr", you may need to know this if you want to 'disable' or 'solo' these logs.
+		Print an object to standard error. This function prints the printable object with the tag specified in `defaultErrLogTag`, you may need to know this if you want to 'disable' or 'solo' these logs.
 		
 		:param: printableObject The object to be printed to standard error.
 	*/
 	public func logErr(printableObject: Printable) {
-		logErr(printableObject, tag: "DRLogErr")
+		logErr(printableObject, tag: defaultErrLogTag)
 	}
 	
 	/**
