@@ -87,4 +87,4 @@ and the logger will be configured, in this case it will now only print calls to 
 For more info, see the documentation comments in the DragonLog.swift file, and the source code itself. You can for example, change the default tag used when using the simple log method, log to standard error (not much use for iOS) instead of standard out, or even log to your own custom NSFileHandle.
 
 ### Any queries?
-If you have any troubles with DragonLogs, or feature requests, feel free to leave a comment or send me an [email](mailto:george+dragonlogs@thegreenfamily.net).
+If you have any troubles with DragonLogs, or feature requests, feel free to leave a comment or send me an [email](mailto:george+dragonlogs@theswift.guru).
