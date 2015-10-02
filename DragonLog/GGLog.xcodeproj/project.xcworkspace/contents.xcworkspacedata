@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:DragonLog.xcodeproj">
+      location = "self:/Users/georgegreen/Documents/code/me/gglog2/GGLog/DragonLog/GGLog.xcodeproj">
    </FileRef>
 </Workspace>

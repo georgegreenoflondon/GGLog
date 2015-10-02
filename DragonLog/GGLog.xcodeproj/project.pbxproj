@@ -12,8 +12,8 @@
 		E7F217791B1A786400F76E81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F217771B1A786400F76E81 /* Main.storyboard */; };
 		E7F2177B1B1A786400F76E81 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7F2177A1B1A786400F76E81 /* Images.xcassets */; };
 		E7F2177E1B1A786400F76E81 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F2177C1B1A786400F76E81 /* LaunchScreen.xib */; };
-		E7F2178A1B1A786400F76E81 /* DragonLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F217891B1A786400F76E81 /* DragonLogTests.swift */; };
-		E7F217951B1A78A800F76E81 /* DragonLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F217941B1A78A800F76E81 /* DragonLog.swift */; };
+		E7F2178A1B1A786400F76E81 /* GGLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F217891B1A786400F76E81 /* GGLogTests.swift */; };
+		E7F217951B1A78A800F76E81 /* GGLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F217941B1A78A800F76E81 /* GGLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +27,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E7F2176E1B1A786400F76E81 /* DragonLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DragonLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7F2176E1B1A786400F76E81 /* GGLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GGLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F217721B1A786400F76E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7F217731B1A786400F76E81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7F217751B1A786400F76E81 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E7F217781B1A786400F76E81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E7F2177A1B1A786400F76E81 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E7F2177D1B1A786400F76E81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		E7F217831B1A786400F76E81 /* DragonLogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DragonLogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7F217831B1A786400F76E81 /* GGLog.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GGLog.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F217881B1A786400F76E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E7F217891B1A786400F76E81 /* DragonLogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonLogTests.swift; sourceTree = "<group>"; };
-		E7F217941B1A78A800F76E81 /* DragonLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragonLog.swift; sourceTree = "<group>"; };
+		E7F217891B1A786400F76E81 /* GGLogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GGLogTests.swift; sourceTree = "<group>"; };
+		E7F217941B1A78A800F76E81 /* GGLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GGLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +61,8 @@
 		E7F217651B1A786400F76E81 = {
 			isa = PBXGroup;
 			children = (
-				E7F217701B1A786400F76E81 /* DragonLog */,
-				E7F217861B1A786400F76E81 /* DragonLogTests */,
+				E7F217701B1A786400F76E81 /* GGLog */,
+				E7F217861B1A786400F76E81 /* GGLogTests */,
 				E7F2176F1B1A786400F76E81 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,16 +70,16 @@
 		E7F2176F1B1A786400F76E81 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E7F2176E1B1A786400F76E81 /* DragonLog.app */,
-				E7F217831B1A786400F76E81 /* DragonLogTests.xctest */,
+				E7F2176E1B1A786400F76E81 /* GGLog.app */,
+				E7F217831B1A786400F76E81 /* GGLog.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E7F217701B1A786400F76E81 /* DragonLog */ = {
+		E7F217701B1A786400F76E81 /* GGLog */ = {
 			isa = PBXGroup;
 			children = (
-				E7F217931B1A787400F76E81 /* DragonLog */,
+				E7F217931B1A787400F76E81 /* GGLog */,
 				E7F217731B1A786400F76E81 /* AppDelegate.swift */,
 				E7F217751B1A786400F76E81 /* ViewController.swift */,
 				E7F217771B1A786400F76E81 /* Main.storyboard */,
@@ -87,6 +87,7 @@
 				E7F2177C1B1A786400F76E81 /* LaunchScreen.xib */,
 				E7F217711B1A786400F76E81 /* Supporting Files */,
 			);
+			name = GGLog;
 			path = DragonLog;
 			sourceTree = "<group>";
 		};
@@ -98,12 +99,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E7F217861B1A786400F76E81 /* DragonLogTests */ = {
+		E7F217861B1A786400F76E81 /* GGLogTests */ = {
 			isa = PBXGroup;
 			children = (
-				E7F217891B1A786400F76E81 /* DragonLogTests.swift */,
+				E7F217891B1A786400F76E81 /* GGLogTests.swift */,
 				E7F217871B1A786400F76E81 /* Supporting Files */,
 			);
+			name = GGLogTests;
 			path = DragonLogTests;
 			sourceTree = "<group>";
 		};
@@ -115,20 +117,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E7F217931B1A787400F76E81 /* DragonLog */ = {
+		E7F217931B1A787400F76E81 /* GGLog */ = {
 			isa = PBXGroup;
 			children = (
-				E7F217941B1A78A800F76E81 /* DragonLog.swift */,
+				E7F217941B1A78A800F76E81 /* GGLog.swift */,
 			);
+			name = GGLog;
 			path = DragonLog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E7F2176D1B1A786400F76E81 /* DragonLog */ = {
+		E7F2176D1B1A786400F76E81 /* GGLog */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E7F2178D1B1A786400F76E81 /* Build configuration list for PBXNativeTarget "DragonLog" */;
+			buildConfigurationList = E7F2178D1B1A786400F76E81 /* Build configuration list for PBXNativeTarget "GGLog" */;
 			buildPhases = (
 				E7F2176A1B1A786400F76E81 /* Sources */,
 				E7F2176B1B1A786400F76E81 /* Frameworks */,
@@ -138,14 +141,14 @@
 			);
 			dependencies = (
 			);
-			name = DragonLog;
+			name = GGLog;
 			productName = DragonLog;
-			productReference = E7F2176E1B1A786400F76E81 /* DragonLog.app */;
+			productReference = E7F2176E1B1A786400F76E81 /* GGLog.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E7F217821B1A786400F76E81 /* DragonLogTests */ = {
+		E7F217821B1A786400F76E81 /* GGLogTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E7F217901B1A786400F76E81 /* Build configuration list for PBXNativeTarget "DragonLogTests" */;
+			buildConfigurationList = E7F217901B1A786400F76E81 /* Build configuration list for PBXNativeTarget "GGLogTests" */;
 			buildPhases = (
 				E7F2177F1B1A786400F76E81 /* Sources */,
 				E7F217801B1A786400F76E81 /* Frameworks */,
@@ -156,9 +159,9 @@
 			dependencies = (
 				E7F217851B1A786400F76E81 /* PBXTargetDependency */,
 			);
-			name = DragonLogTests;
+			name = GGLogTests;
 			productName = DragonLogTests;
-			productReference = E7F217831B1A786400F76E81 /* DragonLogTests.xctest */;
+			productReference = E7F217831B1A786400F76E81 /* GGLog.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -167,11 +170,13 @@
 		E7F217661B1A786400F76E81 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "George Green";
 				TargetAttributes = {
 					E7F2176D1B1A786400F76E81 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = Q38F5PA29C;
 					};
 					E7F217821B1A786400F76E81 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -179,7 +184,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E7F217691B1A786400F76E81 /* Build configuration list for PBXProject "DragonLog" */;
+			buildConfigurationList = E7F217691B1A786400F76E81 /* Build configuration list for PBXProject "GGLog" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -192,8 +197,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E7F2176D1B1A786400F76E81 /* DragonLog */,
-				E7F217821B1A786400F76E81 /* DragonLogTests */,
+				E7F2176D1B1A786400F76E81 /* GGLog */,
+				E7F217821B1A786400F76E81 /* GGLogTests */,
 			);
 		};
 /* End PBXProject section */
@@ -223,7 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7F217951B1A78A800F76E81 /* DragonLog.swift in Sources */,
+				E7F217951B1A78A800F76E81 /* GGLog.swift in Sources */,
 				E7F217761B1A786400F76E81 /* ViewController.swift in Sources */,
 				E7F217741B1A786400F76E81 /* AppDelegate.swift in Sources */,
 			);
@@ -233,7 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7F2178A1B1A786400F76E81 /* DragonLogTests.swift in Sources */,
+				E7F2178A1B1A786400F76E81 /* GGLogTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +247,7 @@
 /* Begin PBXTargetDependency section */
 		E7F217851B1A786400F76E81 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E7F2176D1B1A786400F76E81 /* DragonLog */;
+			target = E7F2176D1B1A786400F76E81 /* GGLog */;
 			targetProxy = E7F217841B1A786400F76E81 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -352,9 +357,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DragonLog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = london.georgegreen.gglog;
+				PRODUCT_NAME = GGLog;
 			};
 			name = Debug;
 		};
@@ -362,9 +369,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DragonLog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = london.georgegreen.gglog;
+				PRODUCT_NAME = GGLog;
 			};
 			name = Release;
 		};
@@ -382,8 +391,8 @@
 				);
 				INFOPLIST_FILE = DragonLogTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DragonLog.app/DragonLog";
+				PRODUCT_NAME = GGLog;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GGLog.app/GGLog";
 			};
 			name = Debug;
 		};
@@ -397,15 +406,15 @@
 				);
 				INFOPLIST_FILE = DragonLogTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DragonLog.app/DragonLog";
+				PRODUCT_NAME = GGLog;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GGLog.app/GGLog";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E7F217691B1A786400F76E81 /* Build configuration list for PBXProject "DragonLog" */ = {
+		E7F217691B1A786400F76E81 /* Build configuration list for PBXProject "GGLog" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7F2178B1B1A786400F76E81 /* Debug */,
@@ -414,21 +423,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E7F2178D1B1A786400F76E81 /* Build configuration list for PBXNativeTarget "DragonLog" */ = {
+		E7F2178D1B1A786400F76E81 /* Build configuration list for PBXNativeTarget "GGLog" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7F2178E1B1A786400F76E81 /* Debug */,
 				E7F2178F1B1A786400F76E81 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		E7F217901B1A786400F76E81 /* Build configuration list for PBXNativeTarget "DragonLogTests" */ = {
+		E7F217901B1A786400F76E81 /* Build configuration list for PBXNativeTarget "GGLogTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7F217911B1A786400F76E81 /* Debug */,
 				E7F217921B1A786400F76E81 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

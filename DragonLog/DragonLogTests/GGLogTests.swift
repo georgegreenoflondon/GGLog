@@ -1,6 +1,6 @@
 //
-//  DragonLogTests.swift
-//  DragonLogTests
+//  GGLogTests.swift
+//  GGLogTests
 //
 //  Created by George Green on 30/05/2015.
 //  Copyright (c) 2015 George Green. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 
-class DragonLogTests: XCTestCase {
+class GGLogTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
