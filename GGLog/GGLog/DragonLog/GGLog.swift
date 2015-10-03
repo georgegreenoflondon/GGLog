@@ -140,7 +140,7 @@ public class _GGLogger {
 		self.disabledTags = scheme.disabledTags
 		self.soloTags = scheme.soloTags
 		if let handle = scheme.logFileHandle { self.stdOutFileHandle = handle }
-		if let handle = scheme.errorFileHandle { self.errorFileHandle = handle }
+		if let handle = scheme.errorFileHandle { self.stdErrFileHandle = handle }
 	}
 	
 	// MARK: - Private Methods
@@ -171,7 +171,7 @@ public class GGLogScheme {
 	/// If set to a non-nil value, when loaded into a logger the logger will use
 	/// this file handle to write the log data to instead of standard out.
 	var logFileHandle: NSFileHandle? = nil
-	/// If set to a non-nil value, when loaded into a logger the logher will user
+	/// If set to a non-nil value, when loaded into a logger the logger will use
 	/// this file handle to write error logs to instead of standard error.
 	var errorFileHandle: NSFileHandle? = nil
 	
