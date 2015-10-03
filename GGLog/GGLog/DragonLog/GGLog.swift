@@ -15,8 +15,8 @@ public class _GGLogger {
 	
 	// MARK: - Private Instance Variables
 	
-	private let stdOutFileHandle = NSFileHandle.fileHandleWithStandardOutput()
-	private let stdErrFileHandle = NSFileHandle.fileHandleWithStandardError()
+	private var stdOutFileHandle = NSFileHandle.fileHandleWithStandardOutput()
+	private var stdErrFileHandle = NSFileHandle.fileHandleWithStandardError()
 	private var disabledTags = Set<String>()
 	private var soloTags: [String]? = nil
 	
@@ -132,11 +132,15 @@ public class _GGLogger {
 	/// Load a tag scheme into the logger. This will override any previous calls to
 	/// configure the tag status, and the logger will take the state as defined by the
 	/// loaded log scheme. This will also override any previous calls to this method.
+	/// The scheme may also specify instances of `NSFileHandle` to be used as the default
+	/// file handle to send log output to when logging or when logging errors.
 	///
 	/// - parameter scheme: The log scheme to be loaded.
 	public func loadLogScheme(scheme: GGLogScheme) {
 		self.disabledTags = scheme.disabledTags
 		self.soloTags = scheme.soloTags
+		if let handle = scheme.logFileHandle { self.stdOutFileHandle = handle }
+		if let handle = scheme.errorFileHandle { self.errorFileHandle = handle }
 	}
 	
 	// MARK: - Private Methods
@@ -163,6 +167,13 @@ public class GGLogScheme {
 	
 	private var disabledTags = Set<String>()
 	private var soloTags: [String]? = nil
+	
+	/// If set to a non-nil value, when loaded into a logger the logger will use
+	/// this file handle to write the log data to instead of standard out.
+	var logFileHandle: NSFileHandle? = nil
+	/// If se to a non-nil value, when loaded into a logger the logher will user
+	/// this file handle to write error logs to instead of standard error.
+	var errorFileHandle: NSFileHandle? = nil
 	
 	// MARK: - Class Methods
 	
