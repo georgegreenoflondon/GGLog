@@ -7,7 +7,7 @@ To use GGLog in your own project simply download the `GGLog.swift` file and incl
 ### Most simple use
 Just a simple print to the console.
 
-    GGLogger.log("This is a log!")
+    GGLog.log("This is a log!")
     => GGLog: This is a log!
 
 This method will accept any object that conforms to the `CustomStringConvertible` (previously `Printable`) protocol and log it to the console.
@@ -15,7 +15,7 @@ This method will accept any object that conforms to the `CustomStringConvertible
 ### Simple tags
 Print an object with a specified tag.
 
-    GGLogger.log("This is a log, with a custom tag!", tag: "MyLogs")
+    GGLog.log("This is a log, with a custom tag!", tag: "MyLogs")
     => MyLogs: This is a log, with a custom tag!
 
 When printed to the console, the log will be prefixed with the tag, this makes it nice and simple to search for specific logs in the console.
@@ -25,13 +25,13 @@ Remember all those times you've hit an issue with your code, added a few logs to
 
 So we have all these logs in the app already, and perhaps quite a few more:
 
-    GGLogger.log("App launched")
-    GGLogger.log("App is online!")
-    GGLogger.log("App did something good!")
+    GGLog.log("App launched")
+    GGLog.log("App is online!")
+    GGLog.log("App did something good!")
 
 And then we add a new log to help debug this issue that we're having:
 
-    GGLogger.log("Hmmm, went down this code path...", tag: "Debug")
+    GGLog.log("Hmmm, went down this code path...", tag: "Debug")
     => GGLog: App launched
     => GGLog: App is online!
     => GGLog: App did something good!
@@ -39,7 +39,7 @@ And then we add a new log to help debug this issue that we're having:
 
 And it's hard to find what we want in all of these logs, well not in this case, but imagine that there are loads more (if your code's anything like mine, it won't take much imagining :P). All you need to do, is pop this line:
 
-    GGLogger.soloTags(["Debug"])
+    GGLog.soloTags(["Debug"])
 
 into your `application:didFinishLaunchingWithOptions:`, and all of a sudden the log output of your app is:
 
@@ -50,7 +50,7 @@ You can very easily turn off all logs in your app except for the ones that are r
 ### Changing the status of a tag
 GGLog lets you enable or disable tags in your project. Simply make a call to `setTag:enabled:` like so:
 
-    GGLogger.setTag("Debug", enabled: false)
+    GGLog.setTag("Debug", enabled: false)
 
 to change the state of a specific tag. If false is passed the logger will ignore any future calls to log with the specified tag, and if true is passed a tag will be re-enabled. By default all tags are enabled and will be printed.
 
@@ -58,14 +58,14 @@ to change the state of a specific tag. If false is passed the logger will ignore
 
 So as we saw before you can use the `soloTags:` method as follows:
 
-    GGLogger.soloTags(["Debug"])
+    GGLog.soloTags(["Debug"])
 
 This takes a list of tags, and simply tells the logger that it should only print logs with the tags specified in this call. It basically disables all logs with a tag that is not in this list.
 
 ### Muting the logger
 If you want to stop your app from logging altogether, perhaps when you release your app, simply call the mute method as follows:
 
-    GGLogger.mute()
+    GGLog.mute()
 
 and the logger will ignore calls to log.
 
@@ -79,7 +79,7 @@ The GGLog kit provides one additional class to help configure your logs, `GGLogS
 You may notice the similarity between these methods and the sections above. You can then load a log scheme into the logger like this:
 
     let scheme = GGLogScheme.soloTagsScheme(["Debug"])
-    GGLogger.loadLogScheme(scheme)
+    GGLog.loadLogScheme(scheme)
 
 and the logger will be configured, in this case it will now only print calls to log made for the tag "Debug". You can use this to, for example, create a log scheme for each of your build schemes so that when you do a debug/release build the logger automatically picks up the relevant scheme. Also, just switching between different sets of logs when debugging can be quite useful.
 
