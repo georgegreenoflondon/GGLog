@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import MessageUI
 
 /// The default global logging instance.
 public let GGLog = _GGLogger()
@@ -15,7 +16,7 @@ public let GGLog = _GGLogger()
 /// The main logging class used to perform all of the logging functionality.
 /// For a full rundown of what, how and why you might need to use this checkout
 /// http://georgegreen.london/gglog
-public class _GGLogger: NSObject {
+public class _GGLogger: NSObject, MFMailComposeViewControllerDelegate {
 	
 	// MARK: - Private Instance Variables
 	
@@ -298,6 +299,74 @@ public class _GGLogger: NSObject {
 		updateLogOverlayView()
 	}
 	
+	// MARK: - Emailing Logs
+	
+	/// An email address to be used as the default to address when presenting
+	/// a mail compose view controller to send the logs via email.
+	var emailAddress: String? = nil
+	
+	/// The subject to be set as default on the mail compose view controller
+	/// when sharing logs.
+	var emailSubject: String?
+	
+	/// An options string to be prepended to the contents of `recentLogs` when
+	/// pre-populating the mail compose view controller for the user to send logs
+	/// via email. You may wish to include user identifable information so that
+	/// you can easily identify the logs when received.
+	var emailMessagePrefix: String?
+	
+	/// The delegate for the mail compose veiw controller if you want to handle the
+	/// events manually.
+	/// - Note: If you do set this to a custom value, remember you must dismiss
+	/// the controller youself also.
+	var mailComposeDelegate: MFMailComposeViewControllerDelegate?
+	
+	/// If the mail controller has been presented, then this will be set to the controller
+	/// from which it was presented. Used for dismissing.
+	var presentingControllerForMailComposeController: UIViewController?
+	
+	/// Display a mail compose view controller pre-configured with the specified
+	/// to `emailAddress`, if any, and the contents of the `recentLogs` array.
+	///
+	/// - parameter controller: The `UIViewController` from which to present the
+	/// mail compose controller. If nil, this method will attempt to find the
+	/// root view controller and present from that.
+	func displayMailComposeSheet(controller: UIViewController? = nil) {
+		let mailController = MFMailComposeViewController()
+		if let email = emailAddress {
+			mailController.setToRecipients([email])
+		}
+		mailController.setSubject(emailSubject ?? "Some logs from GGLog")
+		var messageString = emailMessagePrefix != nil ? "\(emailMessagePrefix!)\n\n" : ""
+		messageString += recentLogsAsFormattedString()
+		mailController.setMessageBody(messageString, isHTML: false)
+		mailController.mailComposeDelegate = mailComposeDelegate ?? self
+		if let presentationController = controller {
+			presentationController.presentViewController(mailController, animated: true, completion: nil)
+			presentingControllerForMailComposeController = presentationController
+		} else {
+			// Attempt to get the root view controller
+			let windows = UIApplication.sharedApplication().windows
+			if windows.count != 0 {
+				let window = windows[0]
+				if let presentationController = window.rootViewController {
+					presentationController.presentViewController(mailController, animated: true, completion: nil)
+					presentingControllerForMailComposeController = presentationController
+				}
+			}
+		}
+		// If the controller has been presented, hide the log overlay view
+		if presentingControllerForMailComposeController != nil {
+			removeOverlayView()
+		}
+	}
+	
+	// MARK: - MFMailComposeViewControllerDelegate Methods
+	
+	public func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+		presentingControllerForMailComposeController?.dismissViewControllerAnimated(true, completion: nil)
+	}
+	
 }
 
 /// Use this class to configure a scheme that can then be loaded into the logger
@@ -373,7 +442,11 @@ class GGLogOverlayView: UIView, GGLogOverlayViewProtocol {
 	
 	// MARK: - Instance Variables
 	
+	/// The text view in which the logs will be placed.
 	var textView: UITextView = UITextView(frame: CGRectZero)
+	/// A button that will present an email compose view controller,
+	/// to allow the user to email you the logs.
+	var mailButton: UIButton = UIButton(type: UIButtonType.System)
 	
 	// MARK: - Object Lifecycle Methods
 	
@@ -390,12 +463,25 @@ class GGLogOverlayView: UIView, GGLogOverlayViewProtocol {
 		textView.backgroundColor = UIColor.clearColor()
 		textView.editable = false
 		textView.selectable = false
-		textView.frame = self.bounds
+		textView.frame = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 44) // 44 = space for the send button
 		textView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
 		textView.textColor = UIColor.whiteColor()
 		textView.font = UIFont(name: "Courier", size: 14)
 		textView.contentInset.top = 20
 		addSubview(textView)
+		// Configure and add the mail button
+		mailButton.setTitle("Send via Email", forState: .Normal)
+		mailButton.tintColor = UIColor(red: 236/255, green: 88/255, blue: 0, alpha: 1)
+		mailButton.frame = CGRectMake(0, bounds.size.height - 44, bounds.size.width, 44)
+		mailButton.titleLabel?.textAlignment = .Center
+		mailButton.autoresizingMask = [.FlexibleTopMargin, .FlexibleWidth]
+		mailButton.addTarget(self, action: "emailTapped", forControlEvents: .TouchUpInside)
+		addSubview(mailButton)
+	}
+	
+	/// Handler for when the mail button is tapped
+	func emailTapped() {
+		GGLog.displayMailComposeSheet()
 	}
 	
 }
