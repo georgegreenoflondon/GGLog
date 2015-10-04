@@ -4,6 +4,7 @@
 //
 //  Created by George Green on 30/05/2015.
 //  Copyright (c) 2015 George Green. All rights reserved.
+//  http://georgegreen.london/gglog
 //
 
 import UIKit
