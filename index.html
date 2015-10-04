@@ -46,7 +46,7 @@
 
 <p>Just a simple print to the console.</p>
 
-<pre><code>GGLogger.log("This is a log!")
+<pre><code>GGLog.log("This is a log!")
 =&gt; GGLog: This is a log!
 </code></pre>
 
@@ -57,7 +57,7 @@
 
 <p>Print an object with a specified tag.</p>
 
-<pre><code>GGLogger.log("This is a log, with a custom tag!", tag: "MyLogs")
+<pre><code>GGLog.log("This is a log, with a custom tag!", tag: "MyLogs")
 =&gt; MyLogs: This is a log, with a custom tag!
 </code></pre>
 
@@ -70,14 +70,14 @@
 
 <p>So we have all these logs in the app already, and perhaps quite a few more:</p>
 
-<pre><code>GGLogger.log("App launched")
-GGLogger.log("App is online!")
-GGLogger.log("App did something good!")
+<pre><code>GGLog.log("App launched")
+GGLog.log("App is online!")
+GGLog.log("App did something good!")
 </code></pre>
 
 <p>And then we add a new log to help debug this issue that we're having:</p>
 
-<pre><code>GGLogger.log("Hmmm, went down this code path...", tag: "Debug")
+<pre><code>GGLog.log("Hmmm, went down this code path...", tag: "Debug")
 =&gt; GGLog: App launched
 =&gt; GGLog: App is online!
 =&gt; GGLog: App did something good!
@@ -86,7 +86,7 @@ GGLogger.log("App did something good!")
 
 <p>And it's hard to find what we want in all of these logs, well not in this case, but imagine that there are loads more (if your code's anything like mine, it won't take much imagining :P). All you need to do, is pop this line:</p>
 
-<pre><code>GGLogger.soloTags(["Debug"])
+<pre><code>GGLog.soloTags(["Debug"])
 </code></pre>
 
 <p>into your <code>application:didFinishLaunchingWithOptions:</code>, and all of a sudden the log output of your app is:</p>
@@ -101,7 +101,7 @@ GGLogger.log("App did something good!")
 
 <p>GGLog lets you enable or disable tags in your project. Simply make a call to <code>setTag:enabled:</code> like so:</p>
 
-<pre><code>GGLogger.setTag("Debug", enabled: false)
+<pre><code>GGLog.setTag("Debug", enabled: false)
 </code></pre>
 
 <p>to change the state of a specific tag. If false is passed the logger will ignore any future calls to log with the specified tag, and if true is passed a tag will be re-enabled. By default all tags are enabled and will be printed.</p>
@@ -111,7 +111,7 @@ GGLogger.log("App did something good!")
 
 <p>So as we saw before you can use the <code>soloTags:</code> method as follows:</p>
 
-<pre><code>GGLogger.soloTags(["Debug"])
+<pre><code>GGLog.soloTags(["Debug"])
 </code></pre>
 
 <p>This takes a list of tags, and simply tells the logger that it should only print logs with the tags specified in this call. It basically disables all logs with a tag that is not in this list.</p>
@@ -121,7 +121,7 @@ GGLogger.log("App did something good!")
 
 <p>If you want to stop your app from logging altogether, perhaps when you release your app, simply call the mute method as follows:</p>
 
-<pre><code>GGLogger.mute()
+<pre><code>GGLog.mute()
 </code></pre>
 
 <p>and the logger will ignore calls to log.</p>
@@ -139,7 +139,7 @@ class func muteScheme() -&gt; GGLogScheme
 <p>You may notice the similarity between these methods and the sections above. You can then load a log scheme into the logger like this:</p>
 
 <pre><code>let scheme = GGLogScheme.soloTagsScheme(["Debug"])
-GGLogger.loadLogScheme(scheme)
+GGLog.loadLogScheme(scheme)
 </code></pre>
 
 <p>and the logger will be configured, in this case it will now only print calls to log made for the tag "Debug". You can use this to, for example, create a log scheme for each of your build schemes so that when you do a debug/release build the logger automatically picks up the relevant scheme. Also, just switching between different sets of logs when debugging can be quite useful.</p>
@@ -147,12 +147,12 @@ GGLogger.loadLogScheme(scheme)
 <h3>
 <a id="more-info" class="anchor" href="#more-info" aria-hidden="true"><span class="octicon octicon-link"></span></a>More info</h3>
 
-<p>For more info, see the documentation comments in the GGLog.swift file, and the source code itself. You can for example, change the default tag used when using the simple log method, log to standard error (not much use for iOS) instead of standard out, or even log to your own custom NSFileHandle.</p>
+<p>For more info, see the documentation comments in the GGLog.swift file, the source code itself and <a href="georgegreen.london/gglog">my website</a>. You can for example, change the default tag used when using the simple log method, log to standard error (not much use for iOS) instead of standard out, or even log to your own custom NSFileHandle.</p>
 
 <h3>
 <a id="any-queries" class="anchor" href="#any-queries" aria-hidden="true"><span class="octicon octicon-link"></span></a>Any queries?</h3>
 
-<p>If you have any troubles with GGLogs, or feature requests, feel free to leave a comment or send me an <a href="mailto:george+logs@theswift.guru">email</a>.</p>
+<p>If you have any troubles with GGLogs, or feature requests, feel free to leave a comment or send me an <a href="mailto:gglog@georgegreen.london">email</a>.</p>
       </section>
     </div>
 
