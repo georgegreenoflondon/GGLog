@@ -142,6 +142,12 @@ public class _GGLogger: NSObject, MFMailComposeViewControllerDelegate {
 		self.soloTags = scheme.soloTags
 		if let handle = scheme.logFileHandle { self.stdOutFileHandle = handle }
 		if let handle = scheme.errorFileHandle { self.stdErrFileHandle = handle }
+		self.visualLogsEnabled = scheme.visualLoggingEnabled
+		if let recogniser = scheme.visualLogGestureRecogniser { self.visualLogGestureRecogniser = recogniser }
+		if let historyLength = scheme.historyLength { self.historyLength = historyLength }
+		if let emailAddress = scheme.emailAddress { self.emailAddress = emailAddress }
+		if let emailSubject = scheme.emailSubject { self.emailSubject = emailSubject }
+		if let emailMessagePrefix = scheme.emailMessagePrefix { self.emailMessagePrefix = emailMessagePrefix }
 	}
 	
 	// MARK: - Private Methods
@@ -176,6 +182,8 @@ public class _GGLogger: NSObject, MFMailComposeViewControllerDelegate {
 	/// to allow the user activate the visual log overlay.
 	/// Defaults to a quadruple tap gesture recogniser, but may be set to a custom gesture
 	/// recogniser.
+	/// - Note: If setting to a custom value it must be set before the call to `enableVisualLogs`
+	/// in order to be properly configured.
 	var visualLogGestureRecogniser: UIGestureRecognizer = {
 		let rec = UITapGestureRecognizer(target: nil, action: "")
 		rec.numberOfTapsRequired = 4
@@ -194,6 +202,8 @@ public class _GGLogger: NSObject, MFMailComposeViewControllerDelegate {
 	/// The root view to which the `visualLogGestureRecogniser` will be added when
 	/// visual logs are enabled. If nil, the root window for the application will
 	/// be used.
+	/// This is also the view to which the `logOverlayView` will be added if the
+	/// gesture is completed successfully.
 	var rootView: UIView?
 	private var _rootView: UIView! {
 		if let rv = rootView { return rv }
@@ -281,7 +291,7 @@ public class _GGLogger: NSObject, MFMailComposeViewControllerDelegate {
 	private func recentLogsAsFormattedString() -> String {
 		var string = ""
 		for log in recentLogs {
-			string += log
+			string += "\(log)\n"
 		}
 		return string
 	}
@@ -323,7 +333,7 @@ public class _GGLogger: NSObject, MFMailComposeViewControllerDelegate {
 	
 	/// If the mail controller has been presented, then this will be set to the controller
 	/// from which it was presented. Used for dismissing.
-	var presentingControllerForMailComposeController: UIViewController?
+	private (set) var presentingControllerForMailComposeController: UIViewController?
 	
 	/// Display a mail compose view controller pre-configured with the specified
 	/// to `emailAddress`, if any, and the contents of the `recentLogs` array.
@@ -386,6 +396,27 @@ public class GGLogScheme {
 	/// If set to a non-nil value, when loaded into a logger the logger will use
 	/// this file handle to write error logs to instead of standard error.
 	var errorFileHandle: NSFileHandle? = nil
+	
+	/// If set to a non-nil value, will overwrite the current `historyLength` value in
+	/// the logger when this scheme is loaded.
+	var historyLength: Int?
+	/// When the scheme is loaded visual logging will be enabled or disabled depending
+	/// on the value of this property. Defaults to false.
+	/// - Warning: If you are using schemes to configure the logger, you should ensure that
+	/// this is left set to false for any realease builds, enless you have a very good
+	/// reason to do otherwise. Allowing users easy access to the logs could create
+	/// security issues. (Not that you should be logging anything security related in a 
+	/// release build anyway :P)
+	var visualLoggingEnabled: Bool = false
+	/// Set to a custom UIGesture recogniser to configure the corresponding
+	/// `visualLogGestureRecogniser` property of the logged when this scheme is loaded.
+	var visualLogGestureRecogniser: UIGestureRecognizer?
+	/// Set to override the `emailSubject` on the logger when this scheme is loaded.
+	var emailSubject: String?
+	/// Set to override the `emailAddress` on the logger when this scheme is loaded.
+	var emailAddress: String?
+	/// Set to override the `emailMessagePrefix` on the logger when this scheme is loaded.
+	var emailMessagePrefix: String?
 	
 	// MARK: - Class Methods
 	
@@ -463,8 +494,6 @@ class GGLogOverlayView: UIView, GGLogOverlayViewProtocol {
 		textView.backgroundColor = UIColor.clearColor()
 		textView.editable = false
 		textView.selectable = false
-		textView.frame = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 44) // 44 = space for the send button
-		textView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
 		textView.textColor = UIColor.whiteColor()
 		textView.font = UIFont(name: "Courier", size: 14)
 		textView.contentInset.top = 20
@@ -472,12 +501,20 @@ class GGLogOverlayView: UIView, GGLogOverlayViewProtocol {
 		// Configure and add the mail button
 		mailButton.setTitle("Send via Email", forState: .Normal)
 		mailButton.tintColor = UIColor(red: 236/255, green: 88/255, blue: 0, alpha: 1)
-		mailButton.frame = CGRectMake(0, bounds.size.height - 44, bounds.size.width, 44)
 		mailButton.titleLabel?.textAlignment = .Center
-		mailButton.autoresizingMask = [.FlexibleTopMargin, .FlexibleWidth]
 		mailButton.addTarget(self, action: "emailTapped", forControlEvents: .TouchUpInside)
 		addSubview(mailButton)
 	}
+	
+	// MARK: - View Lifecycle Methods
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		textView.frame = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 44) // 44 = space for the send button
+		mailButton.frame = CGRectMake(0, bounds.size.height - 44, bounds.size.width, 44)
+	}
+	
+	// MARK: - Action Methods
 	
 	/// Handler for when the mail button is tapped
 	func emailTapped() {
