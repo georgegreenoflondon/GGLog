@@ -84,7 +84,7 @@ You may notice the similarity between these methods and the sections above. You 
 and the logger will be configured, in this case it will now only print calls to log made for the tag "Debug". You can use this to, for example, create a log scheme for each of your build schemes so that when you do a debug/release build the logger automatically picks up the relevant scheme. Also, just switching between different sets of logs when debugging can be quite useful.
 
 ### More info
-For more info, see the documentation comments in the GGLog.swift file, and the source code itself. You can for example, change the default tag used when using the simple log method, log to standard error (not much use for iOS) instead of standard out, or even log to your own custom NSFileHandle.
+For more info, see the documentation comments in the GGLog.swift file, the source code itself, or checkout [my site](http://georgegreen.london/gglog). You can for example, change the default tag used when using the simple log method, log to standard error (not much use for iOS) instead of standard out, or even log to your own custom NSFileHandle.
 
 ### Any queries?
-If you have any troubles with GGLogs, or feature requests, feel free to leave a comment or send me an [email](mailto:george+logs@theswift.guru).
+If you have any troubles with GGLogs, or feature requests, feel free to leave a comment or send me an [email](mailto:gglog@georgegreen.london).
